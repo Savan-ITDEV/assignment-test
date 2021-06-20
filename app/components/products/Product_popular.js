@@ -1,70 +1,60 @@
-import * as React from "react";
+import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { SectionGrid } from "react-native-super-grid";
 import { ActivityIndicator } from "react-native";
 import { Image } from "react-native-elements";
-import getData from "../../config/config";
-
-export default function Product_popular(props) {
-  const [items, setItems] = React.useState([
-    { name: "TURQUOISE", code: "#1abc9c" },
-    { name: "EMERALD", code: "#2ecc71" },
-    { name: "PETER RIVER", code: "#3498db" },
-    { name: "AMETHYST", code: "#9b59b6" },
-    { name: "WET ASPHALT", code: "#34495e" },
-    { name: "GREEN SEA", code: "#16a085" },
-    { name: "NEPHRITIS", code: "#27ae60" },
-    { name: "BELIZE HOLE", code: "#2980b9" },
-    { name: "WISTERIA", code: "#8e44ad" },
-    { name: "MIDNIGHT BLUE", code: "#2c3e50" },
-    { name: "SUN FLOWER", code: "#f1c40f" },
-    { name: "CARROT", code: "#e67e22" },
-  ]);
-
-  const [getData, setData] = React.useState(null);
-  const imageClick = async () => {
-    if (props.props != null) {
-      await props.props.then(
-        async function (result) {
-          await setData(result);
-          console.log(getData);
-        },
-        function (err) {
-          var newName = error;
-        }
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { fetchDataApi } from "../../redux/actions/fetchData";
+class Product_popular extends Component {
+  componentDidMount() {
+    this.props.fetchDataApi();
+  }
+  render() {
+    const { data, isFetching } = this.props.dataReducer;
+    if (isFetching) {
+      return (
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <ActivityIndicator size={"large"} />
+        </View>
+      );
+    } else {
+      return (
+        <View>
+          <SectionGrid
+            //  itemDimension={90}
+            itemDimension={90}
+            spacing={5}
+            horizontal={true}
+            sections={[
+              {
+                data: data,
+              },
+            ]}
+            renderItem={({ item, section, index }) => (
+              <View>
+                <Image
+                  style={styles.itemContainer}
+                  source={{
+                    uri: item.product_path,
+                  }}
+                />
+                <Text style={styles.itemName}>{item.Product_name}</Text>
+                <Text style={styles.itemCode}>{item.price}</Text>
+              </View>
+            )}
+          />
+        </View>
       );
     }
-  };
-
-  React.useEffect(() => {
-    imageClick();
-  }, []);
-  return  (
-    <SectionGrid
-      //  itemDimension={90}
-      itemDimension={90}
-      spacing={10}
-      horizontal={true}
-      sections={[
-        {
-          data: getData > 0 ? getData : items,
-        },
-      ]}
-      // style={styles.gridView}
-      renderItem={({ item, section, index }) => (
-        <View onClick={() => imageClick()}>
-          <Image
-            style={styles.itemContainer}
-            source={{
-              uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5CPauhwegEdKNPg3X_PQevJN-XLWquVAgAQ&usqp=CAU",
-            }}
-          />
-          <Text style={styles.itemName}>{item.name}</Text>
-          <Text style={styles.itemCode}>{item.code}</Text>
-        </View>
-      )}
-    />
-  ) 
+  }
 }
 
 const styles = StyleSheet.create({
@@ -77,11 +67,13 @@ const styles = StyleSheet.create({
     fontSize: 8,
     color: "#00000085",
     fontWeight: "600",
+    textAlign: "center",
   },
   itemCode: {
     fontWeight: "600",
     fontSize: 11,
     color: "#00000085",
+    textAlign: "center",
   },
   sectionHeader: {
     flex: 1,
@@ -92,3 +84,17 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
 });
+
+function mapStateToProps(state) {
+  return {
+    dataReducer: state.dataReducer,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    ...bindActionCreators({ fetchDataApi }, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product_popular);

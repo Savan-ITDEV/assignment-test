@@ -5,7 +5,17 @@ import { View } from "react-native";
 
 import App  from './app/App'
 
-export const COUNTER_CHANGE = 'COUNTER_CHANGE'
+
 
 registerRootComponent(App);
 
+
+
+// import { combineReducers } from "redux";
+// import todos from "./app/redux/actions/todos";
+
+// const rootReducer = combineReducers({
+//   todos,
+// });
+
+// export default rootReducer;
