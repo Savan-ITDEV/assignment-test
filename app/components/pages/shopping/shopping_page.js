@@ -1,16 +1,35 @@
-import React, { Component } from "react";
-import { Text } from "react-native-elements";
-import { StyleSheet, Button, View } from "react-native";
-class ShoppingPage extends Component {
+import React from "react";
+import { StyleSheet, Button, Text, View, ScrollView } from "react-native";
+
+export default class ShoppingPage extends React.Component {
   render() {
     return (
-      <View>
-        <Text >
-          ShoppingPage
-        </Text>
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <Text style={styles.itemName}> Shopping </Text>
+        </ScrollView>
       </View>
     );
   }
 }
-
-export default ShoppingPage;
+const styles = StyleSheet.create({
+  itemName: {
+    flex: 1,
+    fontSize: 15,
+    fontWeight: "600",
+    alignItems: "center",
+    color: "black",
+    paddingLeft: 10,
+    paddingTop: 10,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#F5FCFF",
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: "center",
+    margin: 10,
+  },
+});

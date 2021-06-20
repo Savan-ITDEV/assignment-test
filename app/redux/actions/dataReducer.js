@@ -2,6 +2,7 @@ import {
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE,
   FETCHING_DATA,
+  POST_DATA,
 } from "../constants";
 
 const initialState = {
@@ -28,6 +29,12 @@ export default function DataReducer(state = initialState, action) {
         ...state,
         isFetching: false,
         error: true,
+      };
+    case POST_DATA:
+      return {
+        ...state,
+        isFetching: false,
+
       };
     default:
       return state;

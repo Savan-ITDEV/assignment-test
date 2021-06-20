@@ -1,19 +1,35 @@
-import React, { Component } from "react";
-import { Text, View, ListView, Button } from "react-native";
-import axios from "axios";
+import React from "react";
+import { StyleSheet, Button, Text, View, ScrollView } from "react-native";
 
-class UserPage extends Component {
+export default class UserPage extends React.Component {
   render() {
     return (
-      <View>
-        <Button
-          onPress={this.props.addUser("user1", "las1")}
-          title="edit user"
-        />
-
-        <Text style={styles.textStyle}>{"asdasd"}</Text>
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <Text style={styles.itemName}> UserPage </Text>
+        </ScrollView>
       </View>
     );
   }
 }
-export default UserPage;
+const styles = StyleSheet.create({
+  itemName: {
+    flex: 1,
+    fontSize: 15,
+    fontWeight: "600",
+    alignItems: "center",
+    color: "black",
+    paddingLeft: 10,
+    paddingTop: 10,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#F5FCFF",
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: "center",
+    margin: 10,
+  },
+});

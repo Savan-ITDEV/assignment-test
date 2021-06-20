@@ -20,10 +20,16 @@ import UserPage from "./components/pages/user/user_page";
 
 const store = configureStore();
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+
+
 export default class App extends Component {
+
   render() {
     return (
       <Provider store={store}>
+ 
         <NavigationContainer>
           <Tab.Navigator
             screenOptions={({ route }) => ({

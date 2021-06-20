@@ -1,33 +1,35 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { StyleSheet, Button, Text, View, ScrollView } from "react-native";
 
-class TagPage extends React.Component {
-  increment = () => {
-    this.props.dispatch({ type: 'INCREMENT' });
-  }
-
-  decrement = () => {
-    this.props.dispatch({ type: 'DECREMENT' });
-  }
-
+export default class TagPage extends React.Component {
   render() {
     return (
-      <div>
-        <h2>Counter</h2>
-        <div>
-          <button onClick={this.decrement}>-</button>
-          <span>{this.props.count}</span>
-          <button onClick={this.increment}>+</button>
-        </div>
-      </div>
-    )
+       <View style={{ flex: 1 }}>
+      <ScrollView>
+        <Text style={styles.itemName}> TagPage </Text>
+      </ScrollView>
+    </View>
+    );
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    count: state.count
-  };
-}
-
-export default connect(mapStateToProps)(TagPage);
+const styles = StyleSheet.create({
+  itemName: {
+    flex: 1,
+    fontSize: 15,
+    fontWeight: "600",
+    alignItems: "center",
+    color: "black",
+    paddingLeft: 10,
+    paddingTop: 10,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#F5FCFF",
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: "center",
+    margin: 10,
+  },
+});
