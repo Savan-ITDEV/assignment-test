@@ -11,6 +11,8 @@ import IconMt from "react-native-vector-icons/MaterialIcons";
 import getData from "./app/config/config";
 import HomePage from "./app/components/pages/home_view/home_page";
 import MessagePage from "./app/components/pages/message/message_page";
+import MyAppRedux from "./app/components/pages/shopping/shopping_page";
+import TagPage from "./app/components/pages/tag/tag_page";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,11 +30,11 @@ export default class App extends React.Component {
       // state based on props!
       someInitialValue: this.props.initialValue,
     };
-    console.log("123123");
+    //   console.log("123123");
   }
   async componentDidMount() {
     try {
-      await getData.componentDidMount(); // it will wait here untill function a finishes
+      //  await getData.componentDidMount(); // it will wait here untill function a finishes
     } catch (err) {}
 
     // after function a finished, this function will calls
@@ -77,9 +79,9 @@ export default class App extends React.Component {
         >
           <Tab.Screen name="home" component={HomePage} />
           <Tab.Screen name="message" component={MessagePage} />
-          <Tab.Screen name="shopping" component={HomePage} />
-          <Tab.Screen name="tag" component={HomePage} />
-          <Tab.Screen name="user" component={HomePage} />
+          <Tab.Screen name="shopping" component={MyAppRedux} />
+          <Tab.Screen name="tag" component={TagPage} />
+          <Tab.Screen name="user" component={TestRedux} />
         </Tab.Navigator>
       </NavigationContainer>
     );
